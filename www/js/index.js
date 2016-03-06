@@ -54,17 +54,19 @@ app.initialize();
 app.signInController = new Peek.SignInController();
 app.signOutController = new Peek.SignOutController();
 app.welcome = new Peek.Welcome();
+// app.lockController = new Peek.LockController();
+
 
 $(document).on('pagecontainerbeforeshow', function(event, ui){
   if (typeof ui.toPage == 'object'){
     switch (ui.toPage.attr('id')){
       case 'page-signin':
-              // Reset signin form.
-              app.signInController.resetSignInForm();
-              break;
-            }
-          }
-        });
+      // Reset signin form.
+      app.signInController.resetSignInForm();
+      break;
+    }
+  }
+});
 
 $(document).delegate('#page-signin', 'pagebeforecreate', function(){
   app.signInController.init();
@@ -80,6 +82,7 @@ $(document).delegate('#page-main-menu', 'pagebeforecreate', function(){
 
   retrieveHouses();
   app.welcome.sayHello();
+  lockHouse();
   app.signOutController.$signOutBtnSubmit.off('tap').on('tap', function(){
     app.signOutController.onSignOutCommand();
   });
@@ -94,7 +97,21 @@ function retrieveHouses(){
   }
 }
 
-
+function lockHouse(){
+  $('#list-house').on('click', function(event){
+    var target = $(event.target);
+    console.dir(target.attr('class'));
+    if (target.attr('class') === "ui-btn ui-btn-a mc-top-margin-1-5 ui-corner-all lock-house-button"){
+      console.log('lock');
+      $.ajax({
+        type: 'get',
+        url: 'http://localhost:3000/lock'
+      });
+    } else if (target.attr('class') === "ui-btn ui-btn-a mc-top-margin-1-5 ui-corner-all unlock-house-button"){
+      console.log('unlock');
+    }
+  });
+};
 
 
 

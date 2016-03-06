@@ -1,5 +1,11 @@
-var Peek = Peek || {};
+// var Peek = Peek || {};
 
-Peek.lockController = function(){
-	this.$lockHouseBtn = null;
-};
+// Peek.LockController = function(){
+// 	this.listHomes = null;
+// 	this.$lockHouseBtn = null;
+// };
+
+// Peek.LockController.prototype.init = function(){
+// 	this.listHomes = $('#list-house');
+// 	this.$lockHouseBtn = $('.lock-house-button', this.listHomes);
+// };
