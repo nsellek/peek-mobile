@@ -15,6 +15,9 @@ Peek.Session = (function () {
           result = JSON.parse(window.localStorage.getItem(sessionIdKey));
         } catch(e){}
           return result;
+      },
+      remove: function(sessionData) {
+        window.localStorage.removeItem(sessionIdKey, JSON.stringify(sessionData));
       }
     };
   };

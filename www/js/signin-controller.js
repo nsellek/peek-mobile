@@ -38,7 +38,7 @@ Peek.SignInController.prototype.resetSignInForm = function(){
 
 Peek.SignInController.prototype.onSignInCommand = function() {
 	var me = this,
-	emailAddress = me.$txtEmailAddress.val().trim(),
+	emailAddress = me.$txtEmailAddress.val().trim().toLowerCase(),
 	password = me.$txtPassword.val().trim(),
 	invalidInput = false,
 	invisibleStyle = 'bi-invisible',
