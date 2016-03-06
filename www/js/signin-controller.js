@@ -3,7 +3,7 @@ var Peek = Peek || {};
 Peek.SignInController = function(){
 
 	this.$signInPage = null;
-	this.$btnSubmit = null;
+	this.$signInBtnSubmit = null;
 	this.$txtEmailAddress = null;
 	this.$txtPassword = null;
 	this.$ctnErr = null;
@@ -13,7 +13,7 @@ Peek.SignInController = function(){
 Peek.SignInController.prototype.init = function(){
 	this.$signInPage = $('#page-signin');
 	this.mainMenuPageId = $('#page-main-menu');
-	this.$btnSubmit = $('#btn-submit', this.$signInPage);
+	this.$signInBtnSubmit = $('#signin-btn-submit', this.$signInPage);
 	this.$ctnErr = $('#ctn-err', this.$signInPage);
 	this.$txtEmailAddress = $('#txt-email-address', this.$signInPage);
 	this.$txtPassword = $('#txt-password', this.$signInPage);

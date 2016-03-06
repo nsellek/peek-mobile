@@ -51,6 +51,7 @@ var app = {
 app.initialize();
 
 app.signInController = new Peek.SignInController();
+app.signOutController = new Peek.SignOutController();
 
 $(document).on('pagecontainerbeforeshow', function(event, ui){
     if (typeof ui.toPage == 'object'){
@@ -66,25 +67,33 @@ $(document).on('pagecontainerbeforeshow', function(event, ui){
 $(document).delegate('#page-signin', 'pagebeforecreate', function(){
     app.signInController.init();
 
-    app.signInController.$btnSubmit.off('tap').on('tap',function(){
+    app.signInController.$signInBtnSubmit.off('tap').on('tap',function(){
         app.signInController.onSignInCommand();
     });
 });
 
-$(document).on('pagecontainerbeforechange',function(event, ui){
-    if (typeof ui.toPage !== 'object') return;
+// $(document).on('pagecontainerbeforechange',function(event, ui){
+//     if (typeof ui.toPage !== 'object') return;
 
-    switch (ui.toPage.attr('id')){
-        case 'page-index':
-            if (!ui.prevPage) {
-                // Check session.keepSignedIn and redirect to main menue.
-                var session = Peek.Session.getInstance().get(),
-                    today = new Date();
-                if (session && session.keepSignedIn && new Date(session.expirationDate).getTime() > today.getTime()){
-                    ui.toPage = $('#page-main-menue');
-                }
-            }
-    }
+//     switch (ui.toPage.attr('id')){
+//         case 'page-index':
+//             if (!ui.prevPage) {
+//                 // Check session.keepSignedIn and redirect to main menu.
+//                 var session = Peek.Session.getInstance().get(),
+//                     today = new Date();
+//                 if (session && session.keepSignedIn && new Date(session.expirationDate).getTime() > today.getTime()){
+//                     ui.toPage = $('#page-main-menu');
+//                 }
+//             }
+//     }
+// });
+
+$(document).delegate('#page-main-menu', 'pagebeforecreate', function(){
+    app.signOutController.init();
+
+    app.signOutController.$signOutBtnSubmit.off('tap').on('tap', function(){
+        app.signOutController.onSignOutCommand();
+    });
 });
 
 
