@@ -26,7 +26,9 @@ Peek.SignOutController.prototype.onSignOutCommand = function(){
 			console.dir(resp);
 			if (resp.success === true){
 				Peek.Session.getInstance().remove(session);
-
+				
+				Peek.Welcome.first_name = null;
+				Peek.Welcome.last_name = null;
 				$.mobile.changePage(me.logInPageId);
 				return;
 			}

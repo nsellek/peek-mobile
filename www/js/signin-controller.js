@@ -79,7 +79,7 @@ Peek.SignInController.prototype.onSignInCommand = function() {
 		url: 'http://localhost:3000/login.json',
 		data: {email: emailAddress , password: password},
 		success: function(resp){
-			console.log(resp);
+			console.dir(resp.extras.houses);
 			$.mobile.loading('hide');
 
 			if (resp.success === true){
@@ -90,14 +90,16 @@ Peek.SignInController.prototype.onSignInCommand = function() {
 				});
 				// Go to main menu
 				// $.mobile.navigate(me.mainMenuPageId);
+				for (var i = 0; i < resp.extras.houses.length; i++){
+					$('#list-house').append('<h3 class="house-title"> House Title</h3><div class="ui-grid-a"><div class="ui-block-a"><a data-transition="pop" data-postion-to="window" id="lock-house-button" class="ui-btn ui-btn-a mc-top-margin-1-5 ui-corner-all">lock house</a></div><div class="ui-block-b"><a data-transition="pop" data-postion-to="window" id="lock-house-button" class="ui-btn ui-btn-a mc-top-margin-1-5 ui-corner-all">unlock house</a></div></div>');
+				}
+
 				$.mobile.changePage(me.mainMenuPageId);
 				return;
 			} else {
-				if (resp.extras.errors.full_messages){
-					me.$ctnErr.html("<p>" + resp.extras.errors.full_messages + "</p>");
+					me.$ctnErr.html("<p>Invalid Email or Password. Please try again.</p>");
 					me.$ctnErr.addClass('bi-ctn-err').slideDown();
 					me.$txtEmailAddress.addClass(invalidInputStyle);
-				}
 			}
 		},
 	error: function(e){
