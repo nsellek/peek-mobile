@@ -6,7 +6,6 @@ Peek.SignInController = function(){
 	this.$btnSubmit = null;
 	this.$txtEmailAddress = null;
 	this.$txtPassword = null;
-	this.$chkKeepSignedin = null;
 	this.$ctnErr = null;
 	this.mainMenuPageId = null;
 };
@@ -18,17 +17,16 @@ Peek.SignInController.prototype.init = function(){
 	this.$ctnErr = $('#ctn-err', this.$signInPage);
 	this.$txtEmailAddress = $('#txt-email-address', this.$signInPage);
 	this.$txtPassword = $('#txt-password', this.$signInPage);
-	this.$chkKeepSignedin = $('#chk-keep-signed-in', this.$signinPage);
 };
 
 Peek.SignInController.prototype.emailAddressIsValid = function (email) {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
+	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(email);
 };
 
 Peek.SignInController.prototype.resetSignInForm = function(){
 	var invisibleStyle = 'bi-invisible',
-			invalidInputStyle = 'bi-invalid-input';
+	invalidInputStyle = 'bi-invalid-input';
 
 	this.$ctnErr.html("");
 	this.$ctnErr.removeClass().addClass(invisibleStyle);
@@ -36,16 +34,15 @@ Peek.SignInController.prototype.resetSignInForm = function(){
 	this.$txtPassword.removeClass(invalidInputStyle);
 	this.$txtEmailAddress.val('');
 	this.$txtPassword.val('');
-	this.$chkKeepSignedin.prop('checked', false);
 };
 
 Peek.SignInController.prototype.onSignInCommand = function() {
 	var me = this,
-			emailAddress = me.$txtEmailAddress.val().trim(),
-			password = me.$txtPassword.val().trim(),
-			invalidInput = false,
-			invisibleStyle = 'bi-invisible',
-			invalidInputStyle = 'bi-invalid-input';
+	emailAddress = me.$txtEmailAddress.val().trim(),
+	password = me.$txtPassword.val().trim(),
+	invalidInput = false,
+	invisibleStyle = 'bi-invisible',
+	invalidInputStyle = 'bi-invalid-input';
 
 	// Reset styles.
 	me.$ctnErr.removeClass().addClass(invisibleStyle);
@@ -79,47 +76,33 @@ Peek.SignInController.prototype.onSignInCommand = function() {
 
 	$.ajax({
 		type: 'POST',
-		url: 'https://localhost:3000/login',
-		data: '{email:'+ emailAddress + ', password: '+ password +'}',
+		url: 'http://localhost:3000/login.json',
+		data: {email: emailAddress , password: password},
 		success: function(resp){
+			console.log(resp);
 			$.mobile.loading('hide');
 
 			if (resp.success === true){
 				// Create session.
-				var today = new Date();
-				var expirationDate = new Date();
-				expirationDate.setTime(today.getTime() + Peek.Settings.sessionTimeoutInMSec);
-
 				Peek.Session.getInstance().set({
 					userProfileModel: resp.extras.userProfileModel,
 					sessionId: resp.extras.sessionId,
-					expirationDate: expirationDate,
-					keepSignedIn: me.$chkKeepSignedIn.is(":checked")
 				});
 				// Go to main menu
-				$.mobile.navigate(me.mainMenuPageId);
+				// $.mobile.navigate(me.mainMenuPageId);
+				$.mobile.changePage(me.mainMenuPageId);
 				return;
 			} else {
-				if (resp.extras.msg){
-					switch (resp.extras.msg){
-						case Peek.ApiMessages.DB_ERROR:
-							//TODO: Use a friendlier error message below.
-							me.$ctnErr.html("<p>Oops! Peek had a problem and could not log you on.  Please try again in a few minutes.</p>");
-							me.$cthErr.addClass('bi-ctn-err').slideDown();
-							break;
-						case Peek.ApiMessages.INVALID_PWD:
-						case Peek.APIMessages.EMAIL_NOT_FOUND:
-							me.$ctnErr.html("<p>You entered a wrong username or password.  Please try again.</p>");
-							me.$ctnErr.addClass('bi-ctn-err').slideDown();
-							me.$txtEmailAddress.addClass(invalidInputStyle);
-							break;
-					}
+				if (resp.extras.errors.full_messages){
+					me.$ctnErr.html("<p>" + resp.extras.errors.full_messages + "</p>");
+					me.$ctnErr.addClass('bi-ctn-err').slideDown();
+					me.$txtEmailAddress.addClass(invalidInputStyle);
 				}
 			}
 		},
-		error: function(e){
-			$.mobile.loading('hide');
-			console.log(e.message);
+	error: function(e){
+		$.mobile.loading('hide');
+		console.log(e.message);
 			// TODO: Use a friendlier error message below.
 			me.$ctnErr.html("<p>Oops! Peek had a problem and could not log you on.  Please try again in a few minutes.</p>");
 			me.$ctnErr.addClass('bi-ctn-err').slideDown();
