@@ -31,6 +31,7 @@ Peek.SignOutController.prototype.onSignOutCommand = function(){
 				Peek.Welcome.last_name = null;
 				$('#list-house').empty();
 				$.mobile.changePage(me.logInPageId);
+				location.reload();
 				return;
 			}
 		},

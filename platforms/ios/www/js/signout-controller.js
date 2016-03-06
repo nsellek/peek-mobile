@@ -26,10 +26,12 @@ Peek.SignOutController.prototype.onSignOutCommand = function(){
 			console.dir(resp);
 			if (resp.success === true){
 				Peek.Session.getInstance().remove(session);
-				
+
 				Peek.Welcome.first_name = null;
 				Peek.Welcome.last_name = null;
+				$('#list-house').empty();
 				$.mobile.changePage(me.logInPageId);
+				location.reload();
 				return;
 			}
 		},
