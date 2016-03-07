@@ -49,6 +49,6 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    <allow-navigation href="https://boiling-earth-57949.herokuapp.com/*" />
+    <allow-navigation href="https://calm-beach-58721.herokuapp.com/*" />
     <allow-navigation href="http://localhost:3000/*" />
 </widget>
