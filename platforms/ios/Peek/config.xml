@@ -34,7 +34,7 @@
     <preference name="CameraUsesGeolocation" value="false" />
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
-    <name>HelloCordova</name>
+    <name>Peek</name>
     <description>
     A sample Apache Cordova application that responds to the deviceready event.
   </description>
