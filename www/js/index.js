@@ -54,6 +54,7 @@ app.initialize();
 app.signInController = new Peek.SignInController();
 app.signOutController = new Peek.SignOutController();
 app.welcome = new Peek.Welcome();
+app.unlockController = new Peek.UnlockController();
 // app.lockController = new Peek.LockController();
 
 
@@ -88,10 +89,12 @@ $(document).delegate('#page-main-menu', 'pagebeforecreate', function(){
   });
 });
 
-$(document).delegate('#page-unlock-house', 'pagedeforecreate', function(){
+$(document).delegate('#page-unlock-house', 'pagebeforecreate', function(){
+app.unlockController.init();
 
-
-
+app.unlockController.$backBtn.off('tap').on('tap', function(){
+  app.unlockController.goBack();
+  });
 });
 
 function retrieveHouses(){
@@ -111,7 +114,7 @@ function lockHouse(){
       console.log('lock');
       $.ajax({
         type: 'get',
-        url: 'https://boiling-everglades-46119.herokuapp.com/lock'
+        url: 'http://localhost:3000/lock'
       });
     } else if (target.attr('class') === "ui-btn ui-btn-a mc-top-margin-1-5 ui-corner-all unlock-house-button"){
       console.log('unlock');
