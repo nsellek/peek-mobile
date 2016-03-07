@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+<head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+  <meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" type="text/css" href="js/jquery/jquery.mobile-1.4.5.min.css">
+  <script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>
+  <script type="text/javascript" src='js/jquery/jquery.mobile-1.4.5.min.js'></script>
+  <title>Peek</title>
+</head>
+<body>
+  <!-- page -->
+  <div data-role="page" id="page-signin">
+    <div data-role="header" data-theme="b" data-position="fixed">
+        <a href="#page-index" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+        <h1>Peek</h1>
+    </div><!-- /header -->
+    <div role="main" class="ui-content">
+        <h3>Sign In</h3>
+        <div id="ctn-err" class="bi-invisible"></div>
+        <label for="txt-email-address">Email Address</label>
+        <input type="text" name="txt-email-address" id="txt-email-address" value="">
+        <label for="txt-password">Password</label>
+        <input type="password" name="txt-password" id="txt-password" value="">
+        <a href="#dlg-invalid-credentials" data-rel="popup" data-transition="pop" data-position-to="window" id="signin-btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Submit</a>
+    </div>
+  </div><!-- /page -->
+
+  <!-- page -->
+  <div data-role="page" id="page-main-menu">
+    <div data-role="header" data-theme="b">
+      <a href="#page-index" data-icon="gear" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+        <h1>Peek</h1>
+    </div><!-- /header -->
+    <div role="main" class="ui-content">
+        <h2 class="welcome-message">Welcome </h2>
+        <div id="list-house">
+          
+        </div>
+        <a data-transition="pop" data-position-to="window" id="signout-btn-submit" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">logout</a>
+    </div><!-- /content -->
+  </div><!-- /page --> 
+
+  <!-- page -->
+  <div data-role="page" id="page-unlock-house">
+    <div data-role='header' data-theme='b'>
+      <a href="#page-index" data-icon="gear" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
+        <h1>Peek</h1>
+    </div><!-- /header -->
+    <div data-role='main' class='ui-content'>
+      <h1 class="welcome-message">Welcome </h1>
+
+      
+
+      <a data-transition="pop" data-position-to='window' id='back-btn' class='ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5'>back</a>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="js/session.js"></script>
+  <script type="text/javascript" src="js/signin-controller.js"></script>
+  <script type="text/javascript" src="js/signout-controller.js"></script>
+  <script type="text/javascript" src="js/welcome-page.js"></script>
+  <script type="text/javascript" src="js/lock-controller.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
