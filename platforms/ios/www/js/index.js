@@ -89,7 +89,8 @@ $(document).delegate('#page-main-menu', 'pagebeforecreate', function(){
 });
 
 $(document).delegate('#page-unlock-house', 'pagedeforecreate', function(){
-  
+
+
 
 });
 
@@ -98,7 +99,7 @@ function retrieveHouses(){
   console.log("retrieving.");
   for (var i = 0; i < session.houses.length; i++){
     console.log('Iterating');
-    $('#list-house').append('<h3 class="house-title"> '+ session.houses[i].name +' </h3><div class="ui-grid-a"><div class="ui-block-a"><a data-transition="pop" data-postion-to="window" id="'+ session.houses[i].id +'" class="ui-btn ui-btn-a mc-top-margin-1-5 ui-corner-all lock-house-button">lock house</a></div><div class="ui-block-b"><a data-transition="pop" data-postion-to="window" id="'+ session.houses[i].id +'" class="ui-btn ui-btn-a mc-top-margin-1-5 ui-corner-all unlock-house-button">unlock house</a></div></div>');
+    $('#list-house').append('<h3 class="house-title"> '+ session.houses[i].name +' </h3><div class="ui-grid-a"><div class="ui-block-a"><a data-transition="pop" data-postion-to="window" id="'+ session.houses[i].id +'" class="ui-btn ui-btn-a mc-top-margin-1-5 ui-corner-all lock-house-button">🔒</a></div><div class="ui-block-b"><a data-transition="pop" data-postion-to="window" id="'+ session.houses[i].id +'" class="ui-btn ui-btn-a mc-top-margin-1-5 ui-corner-all unlock-house-button">🔓</a></div></div>');
   }
 }
 
