@@ -75,7 +75,7 @@ Peek.SignInController.prototype.onSignInCommand = function() {
 	$.mobile.loading('show');
 	$.ajax({
 		type: 'POST',
-		url: 'https://calm-beach-58721.herokuapp.com/login.json',
+		url: 'https://boiling-everglades-46119.herokuapp.com/login.json',
 		data: {email: emailAddress , password: password},
 		success: function(resp){
 			console.dir(resp.extras.houses);

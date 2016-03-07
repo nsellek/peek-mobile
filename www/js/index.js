@@ -110,7 +110,7 @@ function lockHouse(){
       console.log('lock');
       $.ajax({
         type: 'get',
-        url: 'https://calm-beach-58721.herokuapp.com/lock'
+        url: 'https://boiling-everglades-46119.herokuapp.com/lock'
       });
     } else if (target.attr('class') === "ui-btn ui-btn-a mc-top-margin-1-5 ui-corner-all unlock-house-button"){
       console.log('unlock');
