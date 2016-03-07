@@ -88,6 +88,11 @@ $(document).delegate('#page-main-menu', 'pagebeforecreate', function(){
   });
 });
 
+$(document).delegate('#page-unlock-house', 'pagedeforecreate', function(){
+  
+
+});
+
 function retrieveHouses(){
   var session = Peek.Session.getInstance().get();
   console.log("retrieving.");
