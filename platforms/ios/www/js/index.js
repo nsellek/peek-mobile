@@ -109,6 +109,7 @@ function lockHouse(){
       });
     } else if (target.attr('class') === "ui-btn ui-btn-a mc-top-margin-1-5 ui-corner-all unlock-house-button"){
       console.log('unlock');
+      $.mobile.changePage($('#page-unlock-house'));
     }
   });
 };

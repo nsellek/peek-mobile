@@ -17,5 +17,5 @@ Peek.Welcome.prototype.init = function(){
 Peek.Welcome.prototype.sayHello = function() {
 	var me = this;
 
-	me.$welcomeMessage.append(' ' + me.first_name + ' ' + me.last_name)
+	me.$welcomeMessage.append(me.first_name + ' ' + me.last_name)
 }
