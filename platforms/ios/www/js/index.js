@@ -35,6 +35,9 @@
   // function, we must explicitly call 'app.receivedEvent(...);'
   onDeviceReady: function() {
     app.receivedEvent('deviceready');
+    if (window.cordova.logger){
+      window.cordova.logger.__onDeviceReady();
+    }
   },
   // Update DOM on a Received Event
   receivedEvent: function(id) {
@@ -69,7 +72,7 @@ $(document).on('pagecontainerbeforeshow', function(event, ui){
   }
 });
 
-$(document).delegate('#page-signin', 'pagebeforecreate', function(){
+$(document).delegate('#page-signin', 'pagebeforecreate page:load', function(){
   app.signInController.init();
   console.log('loaded');
   app.signInController.$signInBtnSubmit.off('tap').on('tap',function(){
@@ -78,7 +81,7 @@ $(document).delegate('#page-signin', 'pagebeforecreate', function(){
   });
 });
 
-$(document).delegate('#page-main-menu', 'pagebeforecreate', function(){
+$(document).delegate('#page-main-menu', 'pagebeforecreate page:load', function(){
   app.signOutController.init();
   app.welcome.init();
 
@@ -90,7 +93,7 @@ $(document).delegate('#page-main-menu', 'pagebeforecreate', function(){
   });
 });
 
-$(document).delegate('#page-unlock-house', 'pagebeforecreate', function(){
+$(document).delegate('#page-unlock-house', 'pagebeforecreate page:load', function(){
   app.unlockController.init();
 
   app.unlockController.$backBtn.off('tap').on('tap', function(){
@@ -127,6 +130,8 @@ function lockHouse(){
       });
     } else if (target.attr('class') === "ui-btn ui-btn-a mc-top-margin-1-5 ui-corner-all unlock-house-button"){
       console.log('unlock');
+      app.unlockController.houseName = target.parents().eq(1).siblings('h3').html();
+      console.log(app.unlockController.houseName);
       $.mobile.changePage($('#page-unlock-house'));
     }
   });

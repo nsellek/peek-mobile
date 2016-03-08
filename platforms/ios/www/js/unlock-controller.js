@@ -6,6 +6,7 @@ Peek.UnlockController = function(){
 	this.mainPage = null;
 	this.imageData = null;
 	this.$pictureSubmitBtn = null;
+	this.houseName = null;
 };
 
 Peek.UnlockController.prototype.init = function(){
@@ -16,10 +17,12 @@ Peek.UnlockController.prototype.init = function(){
 };
 
 Peek.UnlockController.prototype.takePicture = function(){
-	navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,destinationType:0,cameraDirection:1,quality:60});
+	navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,destinationType:0,cameraDirection:1,quality:80});
 
 	function uploadPhoto (data){
+		var session = Peek.Session.getInstance().get();
 		this.imageData = "data:image/jpeg;base64," + data;
+		console.log(this.imageData);
 		cameraPic.src = this.imageData;
 	};
 };
@@ -27,10 +30,21 @@ Peek.UnlockController.prototype.takePicture = function(){
 Peek.UnlockController.prototype.goBack = function(){
 	var me = this;
 
-	cameraPic.src = null;
 	$.mobile.changePage(me.mainMenuPageId);
+	cameraPic.src = null;
 };
 
 Peek.UnlockController.prototype.sendPicture = function(){
-	console.log(this.imageData);
+	var session = Peek.Session.getInstance().get();
+	console.log(this.houseName);
+	$.mobile.loading('show');
+	$.ajax({
+		type: 'POST',
+		url: 'https://boiling-everglades-46119.herokuapp.com/match.json',
+		data: {api_key: session.sessionId, name: this.houseName, image: this.imageData},
+		success: function(resp){
+			$.mobile.loading('hide');
+			$.mobile.chamgePage(this.mainMenuPageId);
+		}
+	});
 };
