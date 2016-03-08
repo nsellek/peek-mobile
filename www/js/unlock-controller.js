@@ -1,21 +1,40 @@
 var Peek = Peek || {};
 
 Peek.UnlockController = function(){
+	this.$cameraBtn = null;
 	this.$backBtn = null;
 	this.mainPage = null;
+	this.imageData = null;
+	this.$pictureSubmitBtn = null;
+	this.houseName = null;
 };
 
 Peek.UnlockController.prototype.init = function(){
 	this.mainMenuPageId = $('#page-main-menu');
-	this.$backBtn = $('#back-btn', this.mainPage);
+	this.$backBtn = $('#back-btn');
+	this.$cameraBtn = $('#camera-btn');
+	this.$pictureSubmitBtn = $('#picture-submit-btn');
 };
 
-Peek.UnlockController.prototype.unlockCommand = function(){
+Peek.UnlockController.prototype.takePicture = function(){
+	navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,destinationType:0,cameraDirection:1,quality:60});
 
+	function uploadPhoto (data){
+		this.imageData = "data:image/jpeg;base64," + data;
+		cameraPic.src = this.imageData;
+	};
 };
 
 Peek.UnlockController.prototype.goBack = function(){
 	var me = this;
 
 	$.mobile.changePage(me.mainMenuPageId);
+	cameraPic.src = null;
+};
+
+Peek.UnlockController.prototype.sendPicture = function(){
+	console.log(this.houseName);
+	$.ajax({
+
+	});
 };

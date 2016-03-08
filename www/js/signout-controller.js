@@ -18,7 +18,7 @@ Peek.SignOutController.prototype.onSignOutCommand = function(){
 
 	$.ajax({
 		type: 'GET',
-		url: 'http://localhost:3000/logout.json',
+		url: 'https://boiling-everglades-46119.herokuapp.com/logout.json',
 		data: 'api_key='+ session.sessionId,
 		success: function(resp){
 

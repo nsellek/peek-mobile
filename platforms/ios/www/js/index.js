@@ -54,6 +54,7 @@ app.initialize();
 app.signInController = new Peek.SignInController();
 app.signOutController = new Peek.SignOutController();
 app.welcome = new Peek.Welcome();
+app.unlockController = new Peek.UnlockController();
 // app.lockController = new Peek.LockController();
 
 
@@ -70,8 +71,9 @@ $(document).on('pagecontainerbeforeshow', function(event, ui){
 
 $(document).delegate('#page-signin', 'pagebeforecreate', function(){
   app.signInController.init();
-
+  console.log('loaded');
   app.signInController.$signInBtnSubmit.off('tap').on('tap',function(){
+    console.log('signin clicked');
     app.signInController.onSignInCommand();
   });
 });
@@ -88,10 +90,20 @@ $(document).delegate('#page-main-menu', 'pagebeforecreate', function(){
   });
 });
 
-$(document).delegate('#page-unlock-house', 'pagedeforecreate', function(){
+$(document).delegate('#page-unlock-house', 'pagebeforecreate', function(){
+  app.unlockController.init();
 
+  app.unlockController.$backBtn.off('tap').on('tap', function(){
+    app.unlockController.goBack();
+  });
 
+  app.unlockController.$cameraBtn.off('tap').on('tap', function(){
+    app.unlockController.takePicture();
+  });
 
+  app.unlockController.$pictureSubmitBtn.off('tap').on('tap', function(){
+    app.unlockController.sendPicture();
+  });
 });
 
 function retrieveHouses(){

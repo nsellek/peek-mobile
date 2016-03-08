@@ -113,3 +113,31 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+#img-container{
+    text-align:center;
+    margin:20px;
+}
+
+#cameraPic{
+    width:auto;
+    height:16em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
