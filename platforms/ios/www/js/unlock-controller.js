@@ -14,6 +14,7 @@ Peek.UnlockController.prototype.init = function(){
 	this.$backBtn = $('#back-btn');
 	this.$cameraBtn = $('#camera-btn');
 	this.$pictureSubmitBtn = $('#picture-submit-btn');
+	this.imageData = cameraPic.src;
 };
 
 Peek.UnlockController.prototype.takePicture = function(){
@@ -21,9 +22,8 @@ Peek.UnlockController.prototype.takePicture = function(){
 
 	function uploadPhoto (data){
 		var session = Peek.Session.getInstance().get();
-		this.imageData = "data:image/jpeg;base64," + data;
 		console.log(this.imageData);
-		cameraPic.src = this.imageData;
+		cameraPic.src = "data:image/jpeg;base64," + data;
 	};
 };
 

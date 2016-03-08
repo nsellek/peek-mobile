@@ -100,7 +100,6 @@ Peek.SignInController.prototype.onSignInCommand = function() {
 		},
 	error: function(e){
 		$.mobile.loading('hide');
-		console.log(e.message);
 			// TODO: Use a friendlier error message below.
 			me.$ctnErr.html("<p>Oops! Peek had a problem and could not log you on.  Please try again in a few minutes.</p>");
 			me.$ctnErr.addClass('bi-ctn-err').slideDown();

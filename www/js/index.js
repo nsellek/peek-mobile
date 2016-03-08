@@ -100,12 +100,8 @@ $(document).delegate('#page-unlock-house', 'pagebeforecreate page:load', functio
     app.unlockController.goBack();
   });
 
-  app.unlockController.$cameraBtn.off('tap').on('tap', function(){
-    app.unlockController.takePicture();
-  });
-
   app.unlockController.$pictureSubmitBtn.off('tap').on('tap', function(){
-    app.unlockController.sendPicture();
+    app.unlockController.takePicture();
   });
 });
 
