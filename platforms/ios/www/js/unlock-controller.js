@@ -27,7 +27,7 @@ Peek.UnlockController.prototype.takePicture = function(){
 		$.mobile.loading('show');
 		$.ajax({
 			type: 'POST',
-			url: 'https://boiling-everglades-46119.herokuapp.com/match.json',
+			url: 'https://peek-wyncode.herokuapp.com/match.json',
 			data: {api_key: session.sessionId, name: this.houseName, image: this.imageData},
 			success: function(resp){
 				if (resp.success === true){

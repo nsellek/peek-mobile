@@ -55,6 +55,6 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    <allow-navigation href="https://boiling-everglades-46119.herokuapp.com/*" />
+    <allow-navigation href="https://peek-wyncode.herokuapp.com/*" />
     <allow-navigation href="http://localhost:3000/*" />
 </widget>
