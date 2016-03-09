@@ -10,6 +10,7 @@ Peek.UnlockController = function(){
 };
 
 Peek.UnlockController.prototype.init = function(){
+	houseName = this.houseName;
 	this.mainMenuPageId = $('#page-main-menu');
 	this.$backBtn = $('#back-btn');
 	this.$pictureSubmitBtn = $('#picture-submit-btn');
@@ -19,28 +20,24 @@ Peek.UnlockController.prototype.init = function(){
 Peek.UnlockController.prototype.takePicture = function(){
 	navigator.camera.getPicture(getPhoto,null,{sourceType:1,destinationType:0,cameraDirection:1,quality:70});
 
-	function getPhoto (data){
+	function getPhoto (data, houseName){
 		var session = Peek.Session.getInstance().get();
 		this.imageData = "data:image/jpeg;base64," + data;
-		console.log(this.imageData);
 		cameraPic.src = this.imageData;
+		$.mobile.loading('show');
 		$.ajax({
 			type: 'POST',
-			url: 'https://boiling-everglades-46119.herokuapp.com/match.json',
+			url: 'https://peek-wyncode.herokuapp.com/match.json',
 			data: {api_key: session.sessionId, name: this.houseName, image: this.imageData},
 			success: function(resp){
-				$.mobile.loading('hide');
 				if (resp.success === true){
+					$.mobile.loading('hide');
 					$.mobile.chamgePage(this.mainMenuPageId);
 				} else {
-					this.$picErr.html('<p>'+ resp.error + '</p>')
-					this.$picErr.addClass('bi-ctn-err').slideDown();
+					$.mobile.loading('hide');
+					Peek.UnlockController.$picErr.html('<p>'+ resp.error +'</p>');
+					Peek.UnlockController.$picErr.addClass('bi-ctn-err').slideDown();
 				}
-			},
-			error: function(e){
-				$.mobile.loading('hide');
-				this.$picErr.html('<p>Oops! Peek had a problem and could not log you on.  Please try again in a few minutes.</p>');
-				this.$picErr.addClass('bi-ctn-err').slideDown();
 			}
 		});
 	};

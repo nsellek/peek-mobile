@@ -75,7 +75,7 @@ Peek.SignInController.prototype.onSignInCommand = function() {
 	$.mobile.loading('show');
 	$.ajax({
 		type: 'POST',
-		url: 'https://boiling-everglades-46119.herokuapp.com/login.json',
+		url: 'https://peek-wyncode.herokuapp.com/login.json',
 		data: {email: emailAddress , password: password},
 		success: function(resp){
 			console.dir(resp.extras.houses);
@@ -93,13 +93,13 @@ Peek.SignInController.prototype.onSignInCommand = function() {
 				$.mobile.changePage(me.mainMenuPageId);
 				return;
 			} else {
-					me.$ctnErr.html("<p>Invalid Email or Password. Please try again.</p>");
-					me.$ctnErr.addClass('bi-ctn-err').slideDown();
-					me.$txtEmailAddress.addClass(invalidInputStyle);
+				me.$ctnErr.html("<p>Invalid Email or Password. Please try again.</p>");
+				me.$ctnErr.addClass('bi-ctn-err').slideDown();
+				me.$txtEmailAddress.addClass(invalidInputStyle);
 			}
 		},
-	error: function(e){
-		$.mobile.loading('hide');
+		error: function(e){
+			$.mobile.loading('hide');
 			// TODO: Use a friendlier error message below.
 			me.$ctnErr.html("<p>Oops! Peek had a problem and could not log you on.  Please try again in a few minutes.</p>");
 			me.$ctnErr.addClass('bi-ctn-err').slideDown();
